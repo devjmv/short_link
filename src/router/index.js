@@ -1,3 +1,4 @@
+import ClientView from '@/views/ClientView.vue'
 import ShortenView from '@/views/ShortenView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -12,6 +13,11 @@ const router = createRouter({
       path: '/shorten',
       name: 'shorten',
       component: ShortenView
+    },
+    {
+      path: '/client',
+      name: 'client',
+      component: ClientView
     },
   ]
 })

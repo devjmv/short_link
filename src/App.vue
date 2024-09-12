@@ -15,16 +15,20 @@ const change = () => {
 </script>
 
 <template>
-  <div :class="mode">
-    <NavBar />
-    <label htmlFor="dark-toggle" className="flex items-center cursor-pointer w-1">
-      <div className="relative">
-        <input @click="change()" type="checkbox" name="dark-mode" id="dark-toggle" className="checkbox hidden" />
-        <div className="block border-[1px] dark:border-white border-gray-900 w-14 h-8 rounded-full" />
-        <div className="dot absolute left-1 top-1 dark:bg-white bg-gray-800 w-6 h-6 rounded-full transition" />
-      </div>
-    </label>
-    <RouterView />
+  <div :class="mode" class="dark:bg-bgdark">
+    <header class="bg-white dark:bg-bgdark">
+      <NavBar />
+    </header>
+    <main>
+      <label htmlFor="dark-toggle" className="flex items-center cursor-pointer w-1">
+        <div className="relative">
+          <input @click="change()" type="checkbox" name="dark-mode" id="dark-toggle" className="checkbox hidden" />
+          <div className="block border-[1px] dark:border-white border-gray-900 w-14 h-8 rounded-full" />
+          <div className="dot absolute left-1 top-1 dark:bg-white bg-gray-800 w-6 h-6 rounded-full transition" />
+        </div>
+      </label>
+      <RouterView />
+    </main>
   </div>
 </template>
 
