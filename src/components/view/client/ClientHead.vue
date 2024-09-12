@@ -1,11 +1,8 @@
 <script setup>
-import {
-  BriefcaseIcon,
-  ChevronDownIcon,
-  MapPinIcon,
-} from '@heroicons/vue/20/solid'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import EnterLink from '@/components/global/EnterLink.vue';
+import SearchIcon from '@/components/icons/SearchIcon.vue';
+import ArrownDownIcon from '@/components/icons/ArrownDownIcon.vue';
+import TotalIcon from '@/components/icons/TotalIcon.vue';
 </script>
 
 <template>
@@ -15,12 +12,12 @@ import EnterLink from '@/components/global/EnterLink.vue';
         <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
           <div
             class="mt-2 p-2 rounded-md ring-1 ring-inset ring-gray-500/10 flex items-center text-sm text-dark dark:text-gray-500 hover:text-bglight hover:bg-gray-400 dark:hover:bg-dark">
-            <BriefcaseIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-dark dark:text-gray-400" aria-hidden="true" />
+            <TotalIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-dark dark:text-gray-400" aria-hidden="true" />
             Full-time
           </div>
           <div
-            class="mt-2 p-2 rounded-md ring-1 ring-inset ring-gray-500/10 flex items-center text-sm text-dark dark:text-gray-500 hover:text-bglight hover:bg-dark">
-            <MapPinIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
+            class="mt-2 p-2 rounded-md ring-1 ring-inset ring-gray-500/10 flex items-center text-sm text-dark dark:text-gray-500 hover:text-bglight hover:bg-gray-400 dark:hover:bg-dark">
+            <TotalIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-dark dark:text-gray-400" aria-hidden="true" />
             Remote
           </div>
         </div>
@@ -31,7 +28,7 @@ import EnterLink from '@/components/global/EnterLink.vue';
           <MenuButton
             class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:ring-gray-400">
             More
-            <ChevronDownIcon class="-mr-1 ml-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
+            <ArrownDownIcon class="size-4" />
           </MenuButton>
 
           <transition enter-active-class="transition ease-out duration-200"
@@ -51,7 +48,13 @@ import EnterLink from '@/components/global/EnterLink.vue';
         </Menu>
       </div>
       <div class="mt-5 flex lg:ml-4 lg:mt-0">
-        <EnterLink />
+        <div class="flex rounded-full bg-bglight dark:bg-dark px-2 w-full max-w-[600px]">
+          <input type="text" class="w-full flex bg-transparent pl-2 text-dark dark:text-light outline-0"
+            placeholder="Find a link..." />
+          <button type="submit" class="relative p-2 bg-bglight dark:bg-dark rounded-full text-dark dark:text-light">
+            <SearchIcon />
+          </button>
+        </div>
       </div>
     </div>
   </div>

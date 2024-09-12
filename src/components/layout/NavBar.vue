@@ -22,7 +22,7 @@ import {
 } from '@heroicons/vue/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
 import { RouterLink } from 'vue-router';
-import LogIn from './components/LogIn.vue';
+import LogIn from './LogIn.vue';
 
 const products = [
     { name: 'Features', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
