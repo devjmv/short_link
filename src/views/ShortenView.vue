@@ -5,5 +5,7 @@ import HeadBanner from '@/components/view/shorten/HeadBanner.vue';
 
 <template>
   <HeadBanner />
-  <EnterLink />
+  <div class='flex items-start justify-center min-h-screen dark:bg-bgdark'>
+    <EnterLink />
+  </div>
 </template>

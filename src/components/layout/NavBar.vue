@@ -61,10 +61,14 @@ const mobileMenuOpen = ref(false)
             </button>
         </div>
         <PopoverGroup class="hidden lg:flex lg:gap-x-12">
+            <RouterLink v-for="item in menu" :key="item.name" :to="item.href"
+                class="text-sm font-semibold leading-6 text-dark dark:text-light">
+                {{ item.name }}
+            </RouterLink>
             <Popover class="relative">
                 <PopoverButton
                     class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-dark dark:text-light">
-                    Product
+                    Configuration
                     <ChevronDownIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
                 </PopoverButton>
 
@@ -101,10 +105,6 @@ const mobileMenuOpen = ref(false)
                     </PopoverPanel>
                 </transition>
             </Popover>
-            <RouterLink v-for="item in menu" :key="item.name" :to="item.href"
-                class="text-sm font-semibold leading-6 text-dark dark:text-light">
-                {{ item.name }}
-            </RouterLink>
         </PopoverGroup>
         <LogIn :hidde="true" />
     </nav>
@@ -140,13 +140,14 @@ const mobileMenuOpen = ref(false)
                                     {{ item.name }}</DisclosureButton>
                             </DisclosurePanel>
                         </Disclosure>
-                        <RouterLink v-for="item in menu" :key="item.name" :to="item.href" @click="mobileMenuOpen = false"
+                        <RouterLink v-for="item in menu" :key="item.name" :to="item.href"
+                            @click="mobileMenuOpen = false"
                             class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                             {{ item.name }}
                         </RouterLink>
                     </div>
                     <div class="py-6">
-                        <LogIn/>
+                        <LogIn />
                     </div>
                 </div>
             </div>
