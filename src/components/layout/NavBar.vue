@@ -37,8 +37,8 @@ const callsToAction = [
 const mobileMenuOpen = ref(false)
 </script>
 <template>
-    <header class="bg-white">
-        <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+    <header class="bg-white dark:bg-bgdark">
+        <nav class="flex items-center justify-between p-6 lg:px-8 shadow-lg" aria-label="Global">
             <div class="flex lg:flex-1">
                 <a href="#" class="-m-1.5 p-1.5">
                     <span class="sr-only">ShortLink</span>
@@ -48,7 +48,7 @@ const mobileMenuOpen = ref(false)
             </div>
             <div class="flex lg:hidden">
                 <button type="button"
-                    class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                    class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-light"
                     @click="mobileMenuOpen = true">
                     <span class="sr-only">Open main menu</span>
                     <Bars3Icon class="h-6 w-6" aria-hidden="true" />
@@ -56,7 +56,7 @@ const mobileMenuOpen = ref(false)
             </div>
             <PopoverGroup class="hidden lg:flex lg:gap-x-12">
                 <Popover class="relative">
-                    <PopoverButton class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+                    <PopoverButton class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-dark dark:text-light">
                         Product
                         <ChevronDownIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
                     </PopoverButton>
@@ -97,22 +97,22 @@ const mobileMenuOpen = ref(false)
                     </transition>
                 </Popover>
 
-                <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Features</a>
-                <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Marketplace</a>
-                <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Company</a>
+                <a href="#" class="text-sm font-semibold leading-6 text-dark dark:text-light">Features</a>
+                <a href="#" class="text-sm font-semibold leading-6 text-dark dark:text-light">Marketplace</a>
+                <a href="#" class="text-sm font-semibold leading-6 text-dark dark:text-light">Company</a>
             </PopoverGroup>
             <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-                <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Log in <span
+                <a href="#" class="text-sm font-semibold leading-6 text-dark dark:text-light">Log in <span
                         aria-hidden="true">&rarr;</span></a>
             </div>
         </nav>
         <Dialog class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
             <div class="fixed inset-0 z-10" />
             <DialogPanel
-                class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto  bg-bglight px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                 <div class="flex items-center justify-between">
                     <a href="#" class="-m-1.5 p-1.5">
-                        <span class="sr-only">Your Company</span>
+                        <span class="sr-only">ShortLink</span>
                         <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                             alt="" />
                     </a>
@@ -156,3 +156,10 @@ const mobileMenuOpen = ref(false)
         </Dialog>
     </header>
 </template>
+
+<style>
+input:checked~.dot {
+    transform: translateX(100%);
+    /* background-color: #132b50; */
+}
+</style>

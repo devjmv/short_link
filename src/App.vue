@@ -1,12 +1,36 @@
 <script setup>
 import { RouterView } from 'vue-router';
 import NavBar from '@/components/layout/NavBar.vue';
+import { ref } from 'vue';
 
+const mode = ref('dark')
+
+const change = () => {
+  if (mode.value === 'dark') {
+    mode.value = 'light'
+  } else {
+    mode.value = 'dark'
+  }
+}
 </script>
 
 <template>
-  <NavBar />
-  <RouterView />
+  <div :class="mode">
+    <NavBar />
+    <label htmlFor="dark-toggle" className="flex items-center cursor-pointer w-1">
+      <div className="relative">
+        <input @click="change()" type="checkbox" name="dark-mode" id="dark-toggle" className="checkbox hidden" />
+        <div className="block border-[1px] dark:border-white border-gray-900 w-14 h-8 rounded-full" />
+        <div className="dot absolute left-1 top-1 dark:bg-white bg-gray-800 w-6 h-6 rounded-full transition" />
+      </div>
+    </label>
+    <RouterView />
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+input:checked~.dot {
+  transform: translateX(100%);
+  /* background-color: #132b50; */
+}
+</style>
