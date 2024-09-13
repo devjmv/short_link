@@ -1,3 +1,4 @@
+import ClientSettingsView from '@/views/ClientSettingsView.vue'
 import ClientView from '@/views/ClientView.vue'
 import ShortenView from '@/views/ShortenView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
@@ -18,6 +19,11 @@ const router = createRouter({
       path: '/client',
       name: 'client',
       component: ClientView
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: ClientSettingsView
     },
   ]
 })

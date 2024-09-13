@@ -1,7 +1,8 @@
 <script setup>
-import { RouterView } from 'vue-router';
+import { RouterView, useRoute } from 'vue-router';
 import NavBar from '@/components/layout/NavBar.vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import ClientHead from './components/view/client/ClientHead.vue';
 
 const mode = ref('dark')
 
@@ -12,6 +13,14 @@ const change = () => {
     mode.value = 'dark'
   }
 }
+
+const route = useRoute();
+const hiddenPaths = ["/client", "/settings"];
+
+const show = computed(() => {
+  return hiddenPaths.includes(route.path);
+});
+
 </script>
 
 <template>
@@ -27,6 +36,7 @@ const change = () => {
           <div className="dot absolute left-1 top-1 dark:bg-white bg-gray-800 w-6 h-6 rounded-full transition" />
         </div>
       </label>
+      <ClientHead v-if="show" class="pt-20" />
       <RouterView />
     </main>
   </div>

@@ -35,6 +35,7 @@ const products = [
 const menu = [
     { name: 'Home', description: '', href: '/shorten' },
     { name: 'Dashboard', description: '', href: '/client' },
+    { name: 'Settings', description: '', href: '/settings' },
 ]
 
 const callsToAction = [

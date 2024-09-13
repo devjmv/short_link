@@ -4,7 +4,7 @@ import { ref } from 'vue';
 import LoginForm from './LoginForm.vue';
 
 const props = defineProps({
-    hidde: String
+    hidde: Boolean
 })
 
 const loginChange = ref(false)

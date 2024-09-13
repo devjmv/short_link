@@ -11,7 +11,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class="mb-6 rounded-lg bg-light dark:bg-dark p-6">
+    <div class="mb-6 rounded-lg bg-bglight dark:bg-dark p-6">
         <div class="flex items-center justify-between">
             <div class="flex items-center">
                 <div>
