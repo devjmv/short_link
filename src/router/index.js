@@ -32,12 +32,11 @@ const router = createRouter({
 router.beforeEach((to) => {
   const store = useAuthStore();
 
-  if (localStorage.getItem("id") && store.user.id == "") {
+  if (localStorage.getItem("isAuthenticated") && store.user.isAuthenticated == false) {
     store.user.role = localStorage.getItem("role");
     store.user.isAuthenticated = localStorage.getItem("isAuthenticated") == "true" ? true : false;
     store.user.access_token = localStorage.getItem("access_token");
     store.user.refresh_token = localStorage.getItem("refresh_token");
-    store.user.lang = localStorage.getItem("lang");
   }
 
   if (to.meta.requiresAdmin && !(store.user.role == "ADMIN")) {

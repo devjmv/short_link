@@ -1,10 +1,12 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth/auth';
+import { ModalStore } from '@/stores/modals/ModalStore';
 import { ref } from 'vue'
 import { useRouter } from 'vue-router';
 
 const store = useAuthStore()
 const router = useRouter();
+const modal = ModalStore()
 
 const username = ref('')
 const password = ref('')
@@ -30,9 +32,7 @@ async function login() {
                 password.value = '';
                 textAlert.value = '';
 
-                if (response['role'] == "ADMIN") {
-                    router.push('/admin/products');
-                }
+                router.push('/client')
             }
             else
                 textAlert.value = "Incorrect username or password!";
@@ -68,7 +68,7 @@ async function login() {
             </div>
 
             <div>
-                <button type="submit"
+                <button type="submit" @click="modal.close()"
                     class="w-full px-4 py-2 text-sm text-center text-white bg-primary rounded-md focus:outline-none hover:bg-secondary hover:text-dark">
                     Sign in
                 </button>

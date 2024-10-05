@@ -107,7 +107,7 @@ const mobileMenuOpen = ref(false)
                 </transition>
             </Popover>
         </PopoverGroup>
-        <LogIn :hidde="true" />
+        <LogIn />
     </nav>
     <Dialog class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
         <div class="fixed inset-0 z-10" />

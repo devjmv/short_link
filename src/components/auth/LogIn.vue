@@ -1,29 +1,32 @@
 <script setup>
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { ref } from 'vue';
-import LoginForm from './LoginForm.vue';
+import LoginForm from './LoginForm.vue'
+import { ModalStore } from '@/stores/modals/ModalStore'
+import { useAuthStore } from '@/stores/auth/auth'
+import { logoutStore } from '@/stores/auth/logout';
 
-const props = defineProps({
-    hidde: Boolean
-})
+const modal = ModalStore()
+const auth = useAuthStore()
+const logout = logoutStore()
 
-const loginChange = ref(false)
-
-const modificarLogin = () => {
-    loginChange.value = !loginChange.value
-}
 
 </script>
 <template>
-    <div v-if="props.hidde" class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <a @click="modificarLogin" href="#" class="text-sm font-semibold leading-6 text-dark dark:text-light">Log in <span
-                aria-hidden="true">&rarr;</span></a>
+    <div v-if="!auth.user.isAuthenticated" class="hidden lg:flex lg:flex-1 lg:justify-end">
+        <button @click="modal.open('login')"
+            class="mt-2 p-2 rounded-md ring-1 ring-inset ring-gray-500/10 flex items-center text-sm text-dark dark:text-gray-500 dark:hover:text-dark hover:text-white hover:bg-dark dark:hover:bg-gray-50">
+            Log in <span aria-hidden="true">&rarr;</span>
+        </button>
     </div>
-    <a href="#" v-if="!props.hidde" @click="modificarLogin" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-        Log in
-    </a>
-    <TransitionRoot as="login" :show="loginChange">
-        <Dialog class="relative z-10" @close="modificarLogin">
+
+    <div v-if="auth.user.isAuthenticated" class="hidden lg:flex lg:flex-1 lg:justify-end">
+        <button @click="logout.logout()"
+            class="mt-2 p-2 rounded-md ring-1 ring-inset ring-gray-500/10 flex items-center text-sm text-dark dark:text-gray-500 dark:hover:text-dark hover:text-white hover:bg-dark dark:hover:bg-gray-50">
+            Logout
+        </button>
+    </div>
+    <TransitionRoot as="login" :show="modal.openLogin">
+        <Dialog class="relative z-10" @close="modal.close()">
             <TransitionChild as="login" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
                 leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
                 <div class="fixed inset-0 bg-bgdark bg-opacity-75 transition-opacity" />
@@ -36,8 +39,7 @@ const modificarLogin = () => {
                         enter-to="opacity-100 translate-y-0 sm:scale-100" leave="ease-in duration-200"
                         leave-from="opacity-100 translate-y-0 sm:scale-100"
                         leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
-                        <DialogPanel
-                            class="relative transform overflow-hidden rounded-lg shadow-xl transition-all ">
+                        <DialogPanel class="relative transform overflow-hidden rounded-lg shadow-xl transition-all ">
                             <LoginForm />
                         </DialogPanel>
                     </TransitionChild>
