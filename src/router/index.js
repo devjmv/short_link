@@ -1,6 +1,4 @@
 import { useAuthStore } from '@/stores/auth/auth'
-import ClientSettingsView from '@/views/ClientSettingsView.vue'
-import ClientView from '@/views/ClientView.vue'
 import ShortenView from '@/views/ShortenView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -19,12 +17,14 @@ const router = createRouter({
     {
       path: '/client',
       name: 'client',
-      component: ClientView
+      component: () => import('../views/ClientView.vue'),
+      meta: { requiresAuth: true }
     },
     {
       path: '/settings',
       name: 'settings',
-      component: ClientSettingsView
+      component: () => import('../views/ClientSettingsView.vue'),
+      meta: { requiresAuth: true }
     },
   ]
 })
@@ -39,15 +39,9 @@ router.beforeEach((to) => {
     store.user.refresh_token = localStorage.getItem("refresh_token");
   }
 
-  if (to.meta.requiresAdmin && !(store.user.role == "ADMIN")) {
-    return {
-      path: "/home",
-    };
-  }
-
   if (to.meta.requiresAuth && !store.user.isAuthenticated && !(store.user.role == "USER")) {
     return {
-      path: "/home",
+      path: "/shorten",
     };
   }
 });

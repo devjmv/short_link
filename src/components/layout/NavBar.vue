@@ -23,6 +23,9 @@ import {
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
 import { RouterLink } from 'vue-router';
 import LogIn from '../auth/LogIn.vue';
+import { useAuthStore } from '@/stores/auth/auth';
+
+const auth = useAuthStore()
 
 const products = [
     { name: 'Features', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
@@ -33,9 +36,9 @@ const products = [
 ]
 
 const menu = [
-    { name: 'Home', description: '', href: '/shorten' },
-    { name: 'Dashboard', description: '', href: '/client' },
-    { name: 'Settings', description: '', href: '/settings' },
+    { name: 'Home', description: '', href: '/shorten', isAuthenticated: false, showAlways: true },
+    { name: 'Dashboard', description: '', href: '/client', isAuthenticated: true, showAlways: false },
+    { name: 'Settings', description: '', href: '/settings', isAuthenticated: true, showAlways: false },
 ]
 
 const callsToAction = [
@@ -62,12 +65,15 @@ const mobileMenuOpen = ref(false)
             </button>
         </div>
         <PopoverGroup class="hidden lg:flex lg:gap-x-12">
-            <RouterLink v-for="item in menu" :key="item.name" :to="item.href"
-                class="text-sm font-semibold leading-6 text-dark dark:text-light">
-                {{ item.name }}
-            </RouterLink>
+            <div v-for="item in menu" :key="item.name">
+                <RouterLink  v-if="item.showAlways || auth.user.isAuthenticated == item.isAuthenticated" :key="item.name" :to="item.href"
+                    class="text-sm font-semibold leading-6 text-dark dark:text-light">
+                    {{ item.name }}
+                </RouterLink>
+            </div>
+
             <Popover class="relative">
-                <PopoverButton
+                <PopoverButton v-if="auth.user.isAuthenticated"
                     class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-dark dark:text-light">
                     Configuration
                     <ChevronDownIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
