@@ -27,7 +27,7 @@ const props = defineProps({
                 <span class="mr-1">{{ props.tag }}</span> Tag
             </div>
             <div class="flex items-center">
-                <LinkIcon class="size-4 mr-2"/> 750
+                <LinkIcon class="size-4 mr-2"/> {{ props.tag }}
             </div>
         </div>
     </div>
