@@ -11,8 +11,6 @@ export const useAuthStore = defineStore('auth', () => {
 
     const user = ref(
         {
-            id: '',
-            email: '',
             role: '',
             isAuthenticated: false,
             access_token: '',
