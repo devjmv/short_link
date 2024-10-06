@@ -1,7 +1,7 @@
 <script setup>
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import LoginForm from './LoginForm.vue'
-import { ModalStore } from '@/stores/modals/ModalStore'
+import { ModalStore } from '@/stores/modals/modalStore'
 import { useAuthStore } from '@/stores/auth/auth'
 import { logoutStore } from '@/stores/auth/logout';
 import RegisterForm from './RegisterForm.vue';

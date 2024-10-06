@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const ModalStore = defineStore('modal', () => {
+
   const openLogin = ref(false)
   const openRegister = ref(false)
 

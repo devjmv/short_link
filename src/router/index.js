@@ -1,4 +1,5 @@
 import { useAuthStore } from '@/stores/auth/auth'
+import { modeStorage } from '@/stores/modeStore';
 import ShortenView from '@/views/ShortenView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -31,12 +32,17 @@ const router = createRouter({
 
 router.beforeEach((to) => {
   const store = useAuthStore();
+  const mode = modeStorage()
 
   if (localStorage.getItem("isAuthenticated") && store.user.isAuthenticated == false) {
     store.user.role = localStorage.getItem("role");
     store.user.isAuthenticated = localStorage.getItem("isAuthenticated") == "true" ? true : false;
     store.user.access_token = localStorage.getItem("access_token");
     store.user.refresh_token = localStorage.getItem("refresh_token");
+  }
+
+  if (localStorage.getItem("mode")) {
+    mode.mode = localStorage.getItem("mode")
   }
 
   if (to.meta.requiresAuth && !store.user.isAuthenticated && !(store.user.role == "USER")) {
