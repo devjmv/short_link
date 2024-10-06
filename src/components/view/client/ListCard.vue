@@ -1,4 +1,6 @@
 <script setup>
+import ArrownLeftIcon from '@/components/icons/ArrownLeftIcon.vue';
+import ArrownRigthcon from '@/components/icons/ArrownRigthcon.vue';
 import CardLink from '@/components/view/client/CardLink.vue';
 import { useAuthStore } from '@/stores/auth/auth';
 import { ClientStore } from '@/stores/client/ClientStore';
@@ -73,10 +75,7 @@ onMounted(() => {
           <div v-if="totalPages > 1" class="flex justify-center items-center space-x-1.5 pt-4">
             <button @click="handlePageChange(currentPage - 1)" :disabled="currentPage === 0"
               class="rounded-md border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-blueFunko-900 hover:border-blueFunko-900 focus:text-white focus:bg-blueFunko-900 focus:border-blueFunko-900 active:border-blueFunko-900 active:text-white active:bg-blueFunko-900 disabled:pointer-events-none disabled:opacity-50">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="h-5 w-5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-              </svg>
+              <ArrownLeftIcon />
             </button>
 
             <button v-for="page in totalPages" :key="page" @click="handlePageChange(page - 1)"
@@ -87,10 +86,7 @@ onMounted(() => {
 
             <button @click="handlePageChange(currentPage + 1)" :disabled="currentPage + 1 >= totalPages"
               class="rounded-md border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-blueFunko-900 hover:border-bg-blueFunko-900 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-blueFunko-600 disabled:pointer-events-none disabled:opacity-50">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="h-5 w-5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-              </svg>
+              <ArrownRigthcon />
             </button>
           </div>
         </div>

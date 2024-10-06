@@ -9,12 +9,18 @@ export const ClientStore = defineStore('client', () => {
   const currentPage = ref(0);
   const pageSize = ref(PAGE_SIZE);
   const totalPages = ref(0);
+  const order = ref("createdAt");
 
-  function getLinks(accessToken, page = currentPage.value, size = pageSize.value) {
-    const params = { page, size };
+  function getLinks(accessToken, page = currentPage.value, size = pageSize.value, sort = order.value) {
+    const params = { page, size, sort};
     const service = new ClientService()
     return service.getLinks(accessToken, params)
   }
 
-  return { currentPage, pageSize, totalPages, getLinks }
+  function createLink(accessToken, originUrl, shortUrl) {
+    const service = new ClientService()
+    return service.createLink(accessToken, originUrl, shortUrl)
+  }
+
+  return { currentPage, pageSize, totalPages, order, getLinks, createLink }
 })

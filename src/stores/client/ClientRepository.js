@@ -40,4 +40,27 @@ export default class ClientRepository {
     }
   }
 
+  async createLink(accessToken, originUrl, shortUrl = null) {
+    try {
+      let headersList = {
+        Accept: '*/*',
+        Authorization: 'Bearer ' + accessToken,
+        'Content-Type': 'application/json',
+        "originUrl": originUrl,
+        "shortUrl": shortUrl,
+      }
+
+      let reqOptions = {
+        url: this.baseUrl,
+        method: 'POST',
+        headers: headersList
+      }
+
+      const response = await axios.request(reqOptions)
+      return response.data
+    } catch (error) {
+      return error.toJSON()
+    }
+  }
+
 }
