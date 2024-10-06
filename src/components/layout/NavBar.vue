@@ -24,8 +24,12 @@ import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/so
 import { RouterLink } from 'vue-router';
 import LogIn from '../auth/LogIn.vue';
 import { useAuthStore } from '@/stores/auth/auth';
+import { modeStorage } from '@/stores/modeStore';
 
 const auth = useAuthStore()
+const mode = modeStorage()
+
+const isDarkMode = ref(mode.mode == 'dark');
 
 const products = [
     { name: 'Features', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
@@ -56,25 +60,18 @@ const mobileMenuOpen = ref(false)
                 <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
             </a>
         </div>
-        <div class="flex lg:hidden">
-            <button type="button"
-                class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-light"
-                @click="mobileMenuOpen = true">
-                <span class="sr-only">Open main menu</span>
-                <Bars3Icon class="h-6 w-6" aria-hidden="true" />
-            </button>
-        </div>
-        <PopoverGroup class="hidden lg:flex lg:gap-x-12">
+        <PopoverGroup class="hidden lg:flex lg:gap-x-2">
             <div v-for="item in menu" :key="item.name">
-                <RouterLink  v-if="item.showAlways || auth.user.isAuthenticated == item.isAuthenticated" :key="item.name" :to="item.href"
-                    class="text-sm font-semibold leading-6 text-dark dark:text-light">
+                <RouterLink v-if="item.showAlways || auth.user.isAuthenticated == item.isAuthenticated" :key="item.name"
+                    :to="item.href"
+                    class="mt-2 p-2 rounded-md ring-1 ring-inset ring-gray-500/10 flex items-center text-sm text-dark dark:text-gray-50 dark:hover:text-dark hover:text-white hover:bg-dark dark:hover:bg-gray-50">
                     {{ item.name }}
                 </RouterLink>
             </div>
 
             <Popover class="relative">
                 <PopoverButton v-if="auth.user.isAuthenticated"
-                    class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-dark dark:text-light">
+                    class="mt-2 p-2 rounded-md ring-1 ring-inset ring-gray-500/10 flex items-center text-sm text-dark dark:text-gray-50 dark:hover:text-dark hover:text-white hover:bg-dark dark:hover:bg-gray-50">
                     Configuration
                     <ChevronDownIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
                 </PopoverButton>
@@ -113,7 +110,29 @@ const mobileMenuOpen = ref(false)
                 </transition>
             </Popover>
         </PopoverGroup>
-        <LogIn />
+        <div class="flex flex-1 justify-end">
+            <div class="flex flex-row items-center justify-end space-x-2">
+                <label for="dark-toggle" class="mt-2 cursor-pointer">
+                    <div class="relative">
+                        <input @click="mode.change()" v-model="isDarkMode" type="checkbox" name="dark-mode"
+                            id="dark-toggle" class="checkbox hidden" />
+                        <div class="block border-[1px] dark:border-white border-gray-900 w-10 h-6 rounded-full"></div>
+                        <div
+                            class="dot absolute left-1 top-1 dark:bg-white bg-gray-900 w-4 h-4 rounded-full transition">
+                        </div>
+                    </div>
+                </label>
+                <LogIn />
+            </div>
+        </div>
+        <div class="flex lg:hidden">
+            <button type="button"
+                class="ml-2 mt-2 p-2 rounded-md ring-1 ring-inset ring-gray-500/10 flex items-center text-sm text-dark dark:text-gray-50 dark:hover:text-dark hover:text-white hover:bg-dark dark:hover:bg-gray-50"
+                @click="mobileMenuOpen = true">
+                <span class="sr-only">Open main menu</span>
+                <Bars3Icon class="h-6 w-6" aria-hidden="true" />
+            </button>
+        </div>
     </nav>
     <Dialog class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
         <div class="fixed inset-0 z-10" />
@@ -152,9 +171,6 @@ const mobileMenuOpen = ref(false)
                             class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                             {{ item.name }}
                         </RouterLink>
-                    </div>
-                    <div class="py-6">
-                        <LogIn />
                     </div>
                 </div>
             </div>

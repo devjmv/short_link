@@ -13,7 +13,7 @@ const logout = logoutStore()
 
 </script>
 <template>
-    <div v-if="!auth.user.isAuthenticated" class="hidden lg:flex lg:flex-1 lg:justify-end">
+    <div v-if="!auth.user.isAuthenticated" class="flex flex-1 justify-end">
         <button @click="modal.open('login')"
             class="mt-2 p-2 rounded-md ring-1 ring-inset ring-gray-500/10 flex items-center text-sm text-dark dark:text-gray-50 dark:hover:text-dark hover:text-white hover:bg-dark dark:hover:bg-gray-50">
             Log in <span aria-hidden="true">&rarr;</span>
@@ -24,9 +24,9 @@ const logout = logoutStore()
         </button>
     </div>
 
-    <div v-if="auth.user.isAuthenticated" class="hidden lg:flex lg:flex-1 lg:justify-end">
+    <div v-if="auth.user.isAuthenticated" class="flex flex-1 justify-end">
         <button @click="logout.logout()"
-            class="mt-2 p-2 rounded-md ring-1 ring-inset ring-gray-500/10 flex items-center text-sm text-dark dark:text-gray-500 dark:hover:text-dark hover:text-white hover:bg-dark dark:hover:bg-gray-50">
+            class="mt-2 p-2 rounded-md ring-1 ring-inset ring-gray-500/10 flex items-center text-sm text-dark dark:text-gray-50 dark:hover:text-dark hover:text-white hover:bg-dark dark:hover:bg-gray-50">
             Logout
         </button>
     </div>
