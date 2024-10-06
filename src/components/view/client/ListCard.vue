@@ -1,25 +1,97 @@
 <script setup>
 import CardLink from '@/components/view/client/CardLink.vue';
+import { useAuthStore } from '@/stores/auth/auth';
+import { ClientStore } from '@/stores/client/ClientStore';
+import { storeToRefs } from 'pinia';
+import { onMounted, ref } from 'vue';
 
-const links = [
-  { short: 'https://shotlink.com/u3h4b5', destination: 'https://www.youtube.com/watch?v=rwIFN450NUQ&list=PLb9gJ6hvvBcdon6FkVS5oavn6vQy134zv&index=6', description: 'Spring Authorization Server es un framework que implementa las especificaciones OAuth 2.1.', tag: '45' },
-  { short: 'https://shotlink.com/u3h4b5', destination: 'https://www.youtube.com/watch?v=rwIFN450NUQ&list=PLb9gJ6hvvBcdon6FkVS5oavn6vQy134zv&index=6', description: 'Spring Authorization Server es un framework que implementa las especificaciones OAuth 2.1.', tag: '45' },
-  { short: 'https://shotlink.com/u3h4b5', destination: 'https://www.youtube.com/watch?v=rwIFN450NUQ&list=PLb9gJ6hvvBcdon6FkVS5oavn6vQy134zv&index=6', description: 'Spring Authorization Server es un framework que implementa las especificaciones OAuth 2.1.', tag: '45' },
-  { short: 'https://shotlink.com/u3h4b5', destination: 'https://www.youtube.com/watch?v=rwIFN450NUQ&list=PLb9gJ6hvvBcdon6FkVS5oavn6vQy134zv&index=6', description: 'Spring Authorization Server es un framework que implementa las especificaciones OAuth 2.1.', tag: '45' },
-  { short: 'https://shotlink.com/u3h4b5', destination: 'https://www.youtube.com/watch?v=rwIFN450NUQ&list=PLb9gJ6hvvBcdon6FkVS5oavn6vQy134zv&index=6', description: 'Spring Authorization Server es un framework que implementa las especificaciones OAuth 2.1.', tag: '45' },
-  { short: 'https://shotlink.com/u3h4b5', destination: 'https://www.youtube.com/watch?v=rwIFN450NUQ&list=PLb9gJ6hvvBcdon6FkVS5oavn6vQy134zv&index=6', description: 'Spring Authorization Server es un framework que implementa las especificaciones OAuth 2.1.', tag: '45' },
-  { short: 'https://shotlink.com/u3h4b5', destination: 'https://www.youtube.com/watch?v=rwIFN450NUQ&list=PLb9gJ6hvvBcdon6FkVS5oavn6vQy134zv&index=6', description: 'Spring Authorization Server es un framework que implementa las especificaciones OAuth 2.1.', tag: '45' },
-]
+const store = ClientStore();
+const auth = useAuthStore();
+const { currentPage, totalPages } = storeToRefs(store);
 
+const links = ref([]);
+const textAlert = ref('');
+const isLoading = ref(true);
+
+const handlePageChange = async (newPage) => {
+  isLoading.value = true;
+  const response = await store.getLinks(auth.user.access_token, newPage);
+  isLoading.value = false;
+  if (response.success === false) {
+    textAlert.value = response.message;
+    console.error("Error fetching links:", response.message);
+  } else {
+    currentPage.value = response.number || 0;
+    totalPages.value = response.totalPages || 1;
+    links.value = response.content || [];
+    textAlert.value = '';
+  }
+};
+
+async function listLinks() {
+  isLoading.value = true;
+  const response = await store.getLinks(auth.user.access_token);
+  isLoading.value = false;
+  if (response.success === false) {
+    textAlert.value = response.message;
+    console.error("Error fetching links:", response.message);
+  } else {
+    currentPage.value = response.number || 0;
+    totalPages.value = response.totalPages || 1;
+    links.value = response.content || [];
+    textAlert.value = '';
+  }
+}
+
+onMounted(() => {
+  listLinks();
+});
 </script>
 
 <template>
   <div class="min-h-screen pt-10 pb-10">
     <div class="mx-auto">
-      <main class="">
-        <div class="px-4">
+      <main>
+        <div v-if="isLoading" class="flex justify-center items-top">
+          <div
+            class="mt-4 font-regular relative block rounded-lg bg-white p-4 text-base leading-5 text-dark opacity-100"
+            style="display: inline-block; margin-left: auto; margin-right: auto;">
+            <div class="mr-12">Loading ...</div>
+          </div>
+        </div>
+        <div class="flex justify-center items-top" v-else-if="textAlert !== ''">
+          <div
+            class="mt-4 font-regular relative block rounded-lg bg-yellow-500 p-4 text-base leading-5 text-dark opacity-100"
+            style="display: inline-block; margin-left: auto; margin-right: auto;">
+            <div class="mr-12">{{ textAlert }}</div>
+          </div>
+        </div>
+        <div v-else class="px-4">
           <div class="grid sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 2xl:grid-cols-4">
-            <CardLink v-for="(item, index) in links" :key="index" :links="item"/>
+            <CardLink v-for="(item, index) in links" :key="index" :links="item" />
+          </div>
+          <div v-if="totalPages > 1" class="flex justify-center items-center space-x-1.5 pt-4 pb-4">
+            <button @click="handlePageChange(currentPage - 1)" :disabled="currentPage === 0"
+              class="rounded-md border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-blueFunko-900 hover:border-blueFunko-900 focus:text-white focus:bg-blueFunko-900 focus:border-blueFunko-900 active:border-blueFunko-900 active:text-white active:bg-blueFunko-900 disabled:pointer-events-none disabled:opacity-50">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="h-5 w-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+              </svg>
+            </button>
+
+            <button v-for="page in totalPages" :key="page" @click="handlePageChange(page - 1)"
+              :disabled="page - 1 === currentPage"
+              class="min-w-9 rounded-md border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-blueFunko-900 hover:border-blueFunko-900 focus:text-white focus:bg-blueFunko-900 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:bg-blueFunko-900 disabled:text-white">
+              {{ page }}
+            </button>
+
+            <button @click="handlePageChange(currentPage + 1)" :disabled="currentPage + 1 >= totalPages"
+              class="rounded-md border border-slate-300 py-2 px-3 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-blueFunko-900 hover:border-bg-blueFunko-900 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-blueFunko-600 disabled:pointer-events-none disabled:opacity-50">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="h-5 w-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+            </button>
           </div>
         </div>
       </main>

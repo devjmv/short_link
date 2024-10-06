@@ -41,7 +41,7 @@ const products = [
 
 const menu = [
     { name: 'Home', description: '', href: '/shorten', isAuthenticated: false, showAlways: true },
-    { name: 'Dashboard', description: '', href: '/client', isAuthenticated: true, showAlways: false },
+    { name: 'Client', description: '', href: '/client', isAuthenticated: true, showAlways: false },
     { name: 'Settings', description: '', href: '/settings', isAuthenticated: true, showAlways: false },
 ]
 

@@ -1,6 +1,6 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth/auth';
-import { ModalStore } from '@/stores/modals/modalStore';
+import { ModalStore } from '@/stores/modals/ModalStore';
 import { ref } from 'vue'
 import { useRouter } from 'vue-router';
 
