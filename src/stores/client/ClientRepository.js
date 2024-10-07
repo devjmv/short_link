@@ -21,7 +21,7 @@ export default class ClientRepository {
       };
 
       const response = await axios.request(reqOptions);
-      
+
       return response.data;
     } catch (error) {
       if (error.message.includes('ERR_CONNECTION_REFUSED')) {
@@ -63,4 +63,24 @@ export default class ClientRepository {
     }
   }
 
+  async createLinkFree(originUrl) {
+    try {
+      let headersList = {
+        Accept: '*/*',
+        'Content-Type': 'application/json',
+        "originUrl": originUrl
+      }
+
+      let reqOptions = {
+        url: this.baseUrl + "/free",
+        method: 'POST',
+        headers: headersList
+      }
+
+      const response = await axios.request(reqOptions)
+      return response.data
+    } catch (error) {
+      return error.toJSON()
+    }
+  }
 }

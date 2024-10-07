@@ -12,7 +12,10 @@ export const logoutStore = defineStore('logout', () => {
         store.user.access_token = ""
         store.user.refresh_token = ""
 
-        localStorage.clear()
+        localStorage.setItem('isAuthenticated', "")
+        localStorage.setItem('role', "")
+        localStorage.setItem('access_token', "")
+        localStorage.setItem('refresh_token', "")
 
         const redirectPath = '/shorten'
         router.push(redirectPath)

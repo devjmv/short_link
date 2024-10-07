@@ -8,7 +8,7 @@ import { modeStorage } from './stores/modeStore';
 const mode = modeStorage()
 
 const route = useRoute();
-const hiddenPaths = ["/client", "/settings"];
+const hiddenPaths = ["/client"];
 
 const show = computed(() => {
   return hiddenPaths.includes(route.path);
@@ -17,7 +17,7 @@ const show = computed(() => {
 </script>
 
 <template>
-  <div :class="mode.mode" class="dark:bg-bgdark">
+  <div :class="mode.mode" class="dark:bg-bgdark min-h-screen">
     <header class="bg-white dark:bg-bgdark">
       <NavBar />
     </header>

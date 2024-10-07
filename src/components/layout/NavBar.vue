@@ -40,7 +40,7 @@ const products = [
 ]
 
 const menu = [
-    { name: 'Home', description: '', href: '/shorten', isAuthenticated: false, showAlways: true },
+    //{ name: 'Home', description: '', href: '/shorten', isAuthenticated: false, showAlways: true },
     { name: 'Client', description: '', href: '/client', isAuthenticated: true, showAlways: false },
     { name: 'Settings', description: '', href: '/settings', isAuthenticated: true, showAlways: false },
 ]
@@ -69,8 +69,8 @@ const mobileMenuOpen = ref(false)
                 </RouterLink>
             </div>
 
-            <Popover class="relative">
-                <PopoverButton v-if="auth.user.isAuthenticated"
+            <Popover v-if="auth.user.isAuthenticated" class="relative">
+                <PopoverButton 
                     class="mt-2 p-2 rounded-md ring-1 ring-inset ring-gray-500/10 flex items-center text-sm text-dark dark:text-gray-50 dark:hover:text-dark hover:text-white hover:bg-dark dark:hover:bg-gray-50">
                     Configuration
                     <ChevronDownIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />

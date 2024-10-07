@@ -6,7 +6,7 @@ import { ref } from 'vue';
 
 const store = ClientStore()
 const auth = useAuthStore()
-const modal = ModalStore();
+const modal = ModalStore()
 
 const originUrl = ref('')
 const shortUrl = ref('')
@@ -33,7 +33,7 @@ async function createLink() {
     <div class="w-full max-w-sm p-8 px-12 bg-light rounded-md shadow-md">
         <div class="flex items-center justify-center">
             <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
-            <span class="font-gloria text-2xl ml-3">LogIn to Short Link</span>
+            <span class="font-gloria text-2xl">Shorten Your Link</span>
         </div>
         <form class="space-y-6" @submit.prevent="createLink">
 
