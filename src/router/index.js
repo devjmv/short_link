@@ -18,13 +18,13 @@ const router = createRouter({
     {
       path: '/client',
       name: 'client',
-      component: () => import('../views/ClientView.vue'),
+      component: () => import('@/views/ClientView.vue'),
       meta: { requiresAuth: true }
     },
     {
       path: '/settings',
       name: 'settings',
-      component: () => import('../views/ClientSettingsView.vue'),
+      component: () => import('@/views/ClientSettingsView.vue'),
       meta: { requiresAuth: true }
     },
   ]

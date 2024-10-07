@@ -21,9 +21,9 @@ const show = computed(() => {
     <header class="bg-white dark:bg-bgdark">
       <NavBar />
     </header>
-    <main>
+    <main class="container mx-auto">
       <ClientHead v-if="show" class="pt-2" />
-      <RouterView class="container mx-auto" />
+      <RouterView />
     </main>
   </div>
 </template>

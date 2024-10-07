@@ -22,7 +22,7 @@ import {
 } from '@heroicons/vue/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
 import { RouterLink } from 'vue-router';
-import LogIn from '../auth/LogIn.vue';
+import LogIn from '@/components/auth/LogIn.vue';
 import { useAuthStore } from '@/stores/auth/auth';
 import { modeStorage } from '@/stores/modeStore';
 

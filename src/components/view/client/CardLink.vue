@@ -10,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-    <div class="mb-6 rounded-lg bg-bglight dark:bg-dark p-6 overflow-hidden">
+    <div class="rounded-lg bg-bglight dark:bg-dark p-6 overflow-hidden">
         <div class="flex items-center justify-between">
             <div class="flex items-center">
                 <div class="max-w-full">
