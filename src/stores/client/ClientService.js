@@ -21,4 +21,9 @@ export default class ClientService {
     const response = await this.#repo.createLinkFree(originUrl)
     return response
   }
+
+  async changeState(accessToken, stateId) {
+    const response = await this.#repo.changeState(accessToken, stateId)
+    return response
+  }
 }

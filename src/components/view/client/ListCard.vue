@@ -45,6 +45,16 @@ const listLinks = async () => {
   }
 }
 
+const changeState = async (stateId) => {
+  const response = await store.changeState(auth.user.access_token, stateId);
+  if (response.success === false) {
+    textAlert.value = response.message;
+    console.error("Error fetching links:", response.message);
+  } else {
+    listLinks();
+  }
+}
+
 onMounted(() => {
   listLinks();
 });
@@ -87,7 +97,8 @@ onMounted(() => {
             </button>
           </div>
           <div class="grid sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 2xl:grid-cols-4">
-            <CardLink v-for="(item, index) in links" :key="index" :links="item" class="mb-6" />
+            <CardLink v-for="(item, index) in links" :key="index" :links="item" class="mb-6"
+              @changeState="changeState" />
           </div>
           <div v-if="totalPages > 1" class="flex justify-center items-center space-x-1.5">
             <button @click="handlePageChange(currentPage - 1)" :disabled="currentPage === 0"

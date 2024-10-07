@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default class ClientRepository {
   constructor() {
-    this.baseUrl = import.meta.env.VITE_API_ENDPOINT + '/link'
+    this.baseUrl = import.meta.env.VITE_API_ENDPOINT
   }
 
   async getLinks(accessToken, params = {}) {
@@ -14,7 +14,7 @@ export default class ClientRepository {
       };
 
       const reqOptions = {
-        url: this.baseUrl,
+        url: this.baseUrl + '/link',
         method: 'GET',
         headers: headersList,
         params: params
@@ -51,7 +51,7 @@ export default class ClientRepository {
       }
 
       let reqOptions = {
-        url: this.baseUrl,
+        url: this.baseUrl + '/link',
         method: 'POST',
         headers: headersList
       }
@@ -72,9 +72,31 @@ export default class ClientRepository {
       }
 
       let reqOptions = {
-        url: this.baseUrl + "/free",
+        url: this.baseUrl + "/link/free",
         method: 'POST',
         headers: headersList
+      }
+
+      const response = await axios.request(reqOptions)
+      return response.data
+    } catch (error) {
+      return error.toJSON()
+    }
+  }
+
+  async changeState(accessToken, stateId) {
+    try {
+      let headersList = {
+        Accept: '*/*',
+        Authorization: 'Bearer ' + accessToken,
+        'Content-Type': 'application/json'
+      }
+
+      let reqOptions = {
+        url: this.baseUrl + "/state/" + stateId,
+        method: 'PUT',
+        headers: headersList,
+        data: "default"
       }
 
       const response = await axios.request(reqOptions)

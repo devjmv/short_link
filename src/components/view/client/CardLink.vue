@@ -11,6 +11,8 @@ const auth = useAuthStore()
 defineProps({
     links: Object,
 })
+
+const emit = defineEmits(['changeState'])
 </script>
 
 <template>
@@ -34,12 +36,12 @@ defineProps({
             State: {{ links.status.status }} Reason: {{ links.status.reason }}
         </p>
         <div class="mt-6 flex items-center justify-between text-sm font-semibold text-gray-900 dark:text-light">
-            <button v-if="links.status.status == 'ACTIVE' && auth.user.isAuthenticated"
+            <button v-if="links.status.status == 'ACTIVE' && auth.user.isAuthenticated" @click="emit('changeState', links.status.id)"
                 class="mt-2 p-2 rounded-md ring-1 ring-inset ring-red-900 flex items-center text-sm text-dark dark:text-gray-500 hover:text-bglight hover:bg-red-900 dark:hover:bg-red-500">
                 <TotalIcon class="mr-1.5 h-5 w-5 flex-shrink" aria-hidden="true" />
                 {{ links.status.status == 'ACTIVE' ? 'Disable' : '' }}
             </button>
-            <button v-if="links.status.status == 'INACTIVE' && auth.user.isAuthenticated"
+            <button v-if="links.status.status == 'INACTIVE' && auth.user.isAuthenticated" @click="emit('changeState', links.status.id)"
                 class="mt-2 p-2 rounded-md ring-1 ring-inset ring-green-900 flex items-center text-sm text-green-500 dark:text-green-200 hover:text-green-200 hover:bg-green-900 dark:hover:bg-green-900">
                 <LinkIcon class="mr-1.5 h-5 w-5 flex-shrink" aria-hidden="true" />
                 {{ links.status.status == 'INACTIVE' ? 'Enable' : '' }}

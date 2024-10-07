@@ -44,5 +44,10 @@ export const ClientStore = defineStore('client', () => {
     return service.createLink(accessToken, originUrl, shortUrl)
   }
 
-  return { currentPage, pageSize, totalPages, order, listLinksGest, getLinks, createLink, createLinkFree, addLinkGest, clearLink }
+  function changeState(accessToken, stateId) {
+    const service = new ClientService()
+    return service.changeState(accessToken, stateId)
+  }
+
+  return { currentPage, pageSize, totalPages, order, listLinksGest, getLinks, createLink, createLinkFree, addLinkGest, clearLink, changeState }
 })
