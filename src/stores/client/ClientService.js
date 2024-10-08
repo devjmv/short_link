@@ -17,6 +17,11 @@ export default class ClientService {
     return response
   }
 
+  async editLink(accessToken, newLink) {
+    const response = await this.#repo.editLink(accessToken, newLink)
+    return response
+  }
+
   async createLinkFree(originUrl) {
     const response = await this.#repo.createLinkFree(originUrl)
     return response
