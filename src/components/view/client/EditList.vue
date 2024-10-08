@@ -4,15 +4,18 @@ import { ref } from 'vue';
 import EditLinkForm from '@/components/forms/EditLinkForm.vue';
 import EditIcon from '@/components/icons/EditIcon.vue';
 
-defineProps({
+const props = defineProps({
     link: Object,
 })
 
 const openProperties = ref(false)
+const emit = defineEmits(['changeState'])
 
 const open = () => {
     openProperties.value = !openProperties.value
+    emit('changeState', props.link.id)
 }
+
 
 </script>
 
