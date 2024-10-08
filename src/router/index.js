@@ -1,5 +1,6 @@
 import { useAuthStore } from '@/stores/auth/auth'
 import { modeStorage } from '@/stores/modeStore';
+import ClientView from '@/views/ClientView.vue';
 import ShortenView from '@/views/ShortenView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -18,7 +19,7 @@ const router = createRouter({
     {
       path: '/client',
       name: 'client',
-      component: () => import('@/views/ClientView.vue'),
+      component: ClientView,
       meta: { requiresAuth: true }
     },
     {

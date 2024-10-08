@@ -1,8 +1,8 @@
 <script setup>
 import { Dialog, DialogPanel, Menu, MenuButton, MenuItem, MenuItems, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import SearchIcon from '@/components/icons/SearchIcon.vue';
+/* import SearchIcon from '@/components/icons/SearchIcon.vue';
 import ArrownDownIcon from '@/components/icons/ArrownDownIcon.vue';
-import TotalIcon from '@/components/icons/TotalIcon.vue';
+import TotalIcon from '@/components/icons/TotalIcon.vue'; */
 import LinkIcon from '@/components/icons/LinkIcon.vue';
 import CreateLinkForm from '@/components/forms/CreateLinkForm.vue';
 import { ModalStore } from '@/stores/modals/ModalStore';
@@ -42,15 +42,14 @@ const modal = ModalStore();
               </div>
             </Dialog>
           </TransitionRoot>
-          <button
+          <!-- <button
             class="mt-2 p-2 rounded-md ring-1 ring-inset ring-gray-500/10 flex items-center text-sm text-dark dark:text-gray-500 hover:text-bglight hover:bg-dark dark:hover:bg-dark">
             <TotalIcon class="mr-1.5 h-5 w-5 flex-shrink-0" aria-hidden="true" />
             Remote
-          </button>
+          </button> -->
         </div>
       </div>
-      <div class="mt-5 flex lg:ml-4 lg:mt-0">
-        <!-- Dropdown -->
+      <!-- <div class="mt-5 flex lg:ml-4 lg:mt-0">
         <Menu as="div" class="relative">
           <MenuButton
             class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:ring-gray-400">
@@ -73,8 +72,8 @@ const modal = ModalStore();
             </MenuItems>
           </transition>
         </Menu>
-      </div>
-      <div class="mt-5 flex lg:ml-4 lg:mt-0">
+      </div> -->
+      <!-- <div class="mt-5 flex lg:ml-4 lg:mt-0">
         <div class="flex rounded-full bg-bglight dark:bg-dark px-2 w-full max-w-[600px]">
           <input type="text" class="w-full flex bg-transparent pl-2 text-dark dark:text-light outline-0"
             placeholder="Find a link..." />
@@ -82,7 +81,7 @@ const modal = ModalStore();
             <SearchIcon />
           </button>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

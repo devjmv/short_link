@@ -88,7 +88,7 @@ async function login() {
                 Register
             </button>
         </div>
-        <form class="mt-4">
+        <!-- <form class="mt-4">
             <div class="flex items-center justify-center mt-4">
                 <p class="block text-sm text-verdigris fontme" href="#">Or log in with your favorite social provider to
                     get
@@ -106,6 +106,6 @@ async function login() {
                     GitHub
                 </button>
             </div>
-        </form>
+        </form> -->
     </div>
 </template>

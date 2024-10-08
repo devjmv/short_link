@@ -6,10 +6,10 @@ import {
     Disclosure,
     DisclosureButton,
     DisclosurePanel,
-    Popover,
-    PopoverButton,
+    //Popover,
+    //PopoverButton,
     PopoverGroup,
-    PopoverPanel,
+    //PopoverPanel,
 } from '@headlessui/vue'
 import {
     ArrowPathIcon,
@@ -42,7 +42,7 @@ const products = [
 const menu = [
     //{ name: 'Home', description: '', href: '/shorten', isAuthenticated: false, showAlways: true },
     { name: 'Client', description: '', href: '/client', isAuthenticated: true, showAlways: false },
-    { name: 'Settings', description: '', href: '/settings', isAuthenticated: true, showAlways: false },
+    //{ name: 'Settings', description: '', href: '/settings', isAuthenticated: true, showAlways: false },
 ]
 
 const callsToAction = [
@@ -69,7 +69,7 @@ const mobileMenuOpen = ref(false)
                 </RouterLink>
             </div>
 
-            <Popover v-if="auth.user.isAuthenticated" class="relative">
+            <!-- <Popover v-if="auth.user.isAuthenticated" class="relative">
                 <PopoverButton 
                     class="mt-2 p-2 rounded-md ring-1 ring-inset ring-gray-500/10 flex items-center text-sm text-dark dark:text-gray-50 dark:hover:text-dark hover:text-white hover:bg-dark dark:hover:bg-gray-50">
                     Configuration
@@ -108,7 +108,7 @@ const mobileMenuOpen = ref(false)
                         </div>
                     </PopoverPanel>
                 </transition>
-            </Popover>
+            </Popover> -->
         </PopoverGroup>
         <div class="flex flex-1 justify-end">
             <div class="flex flex-row items-center justify-end space-x-2">

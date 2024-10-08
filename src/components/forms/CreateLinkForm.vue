@@ -16,7 +16,6 @@ async function createLink() {
     if (store.value != '')
         try {
             const response = await store.createLink(auth.user.access_token, originUrl.value, shortUrl.value == "" ? null : shortUrl.value);
-            console.log(response);
             if (response.status === 400)
                 textAlert.value = "Url Origin or Short Url already in use";
             else
