@@ -53,7 +53,7 @@ const emit = defineEmits(['changeState'])
                 {{ links.status.status == 'INACTIVE' ? 'Enable' : '' }}
             </button>
             <span v-if="auth.user.isAuthenticated" class="flex flex-row items-center">
-                <EditList :link="links" @changeState="changeState" />
+                <EditList :link="links" />
                 <ModalAccess :accessLogs="links.accessLogs" />
                 <span
                     class="mt-2 p-2 rounded-md ring-1 ring-inset ring-gray-500/10 flex items-center text-sm text-dark dark:text-gray-500 hover:text-bglight hover:bg-dark dark:hover:bg-dark">

@@ -36,7 +36,7 @@ const open = () => {
                         leave-from="opacity-100 translate-y-0 sm:scale-100"
                         leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
                         <DialogPanel class="relative transform overflow-hidden rounded-lg shadow-xl transition-all ">
-                            <EditLinkForm :link="link" @changeState="changeState" @open="open" />
+                            <EditLinkForm :link="link" @open="open" />
                         </DialogPanel>
                     </TransitionChild>
                 </div>

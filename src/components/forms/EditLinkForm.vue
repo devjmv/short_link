@@ -17,7 +17,7 @@ const shortUrl = ref(props.link.shortUrl)
 const textAlert = ref('')
 const newLink = ref(props.link)
 
-const emit = defineEmits(['changeState', 'open'])
+const emit = defineEmits(['open'])
 
 async function editLink() {
     if (store.value != '')
@@ -68,7 +68,7 @@ async function editLink() {
             </div>
 
             <div>
-                <button type="submit" @click="emit('open'), emit('changeState')"
+                <button type="submit" @click="emit('open')"
                     class="w-full px-4 py-2 text-sm text-center text-white bg-primary rounded-md focus:outline-none hover:bg-secondary hover:text-dark">
                     Edit Link
                 </button>
