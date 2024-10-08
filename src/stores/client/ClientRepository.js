@@ -63,6 +63,28 @@ export default class ClientRepository {
     }
   }
 
+  async editLink(accessToken, newLink) {
+    try {
+      let headersList = {
+        Accept: '*/*',
+        Authorization: 'Bearer ' + accessToken,
+        'Content-Type': 'application/json'
+      }
+
+      let reqOptions = {
+        url: this.baseUrl + '/link',
+        method: 'PUT',
+        headers: headersList,
+        data: newLink
+      }
+
+      const response = await axios.request(reqOptions)
+      return response.data
+    } catch (error) {
+      return error.toJSON()
+    }
+  }
+
   async createLinkFree(originUrl) {
     try {
       let headersList = {
